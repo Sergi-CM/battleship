@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400&display=swap" rel="stylesheet">
+    <title>Battleship</title>
+</head>
+<body>
+    <div id="welcome-modal">
+        <div id="greeting">
+            <p id="welcome-title">Welcome to Battleship!</p>
+            <p id="welcome-text">What's your name?</p>
+            <input id="name-input" type="text" autofocus placeholder="Your name here"> <br>
+            <button id="start-button" onclick="gameStart()">Let's go!</button>
+        </div>
+        <p id="tip">Tip: If you're having visualization issues, try reducing the zoom of your browser.</p>
+    </div>
+    <h1 id="game-title">BATTLESHIP</h1>
+    <div id="container">
+        <div id="player-sidebar" class="sidebar">
+            <h1 id="sidebar-player-name" class="sidebar-header"></h1>
+            <div>
+                <div class="ship-stats">
+                    <img id="player-Aircraft-Carrier" class="aircraft" src="media/Aircraft-Carrier.png" alt="Aircraft">
+                    <p class="ship-name">Aircraft Carrier (A)</p>
+                    <div class="ship-health" id="player-Aircraft-Carrier-health"></div>
+                </div>
+                <div class="ship-stats">
+                    <img id="player-Battleship" class="battleship" src="media/battleship.png" alt="Battleship">
+                    <p class="ship-name">Battleship (B)</p>
+                    <div class="ship-health" id="player-Battleship-health"></div>
+                </div>
+                <div class="ship-stats">
+                    <img id="player-Destroyer" class="destroyer" src="media/destroyer.png" alt="Destroyer">
+                    <p class="ship-name">Destroyer (D)</p>
+                    <div class="ship-health" id="player-Destroyer-health"></div>
+                </div>
+                <div class="ship-stats">
+                    <img id="player-Submarine" class="submarine" src="media/submarine.png" alt="Submarine">
+                    <p class="ship-name">Submarine (S)</p>
+                    <div class="ship-health" id="player-Submarine-health"></div>
+                </div>
+                <div class="ship-stats">
+                    <img id="player-Boat" class="boat" src="media/boat.png" alt="Boat">
+                    <p class="ship-name">Boat (T)</p>
+                    <div class="ship-health" id="player-Boat-health"></div>
+                </div>
+            </div>
+        </div>
+        <div id="player-board"></div>
+        <div id="enemy-board" ></div>
+        <div id="player-ships-placer">
+            <div class="ship-placer">
+                <p class="ship-placer-title">Aircraft Carrier</p>
+                <div class="ship-coords">
+                    <label for="Aircraft-X">X Coord</label><input id="Aircraft-X" type="text" maxlength="2">
+                    <label for="Aircraft-Y">Y Coord</label><input id="Aircraft-Y" type="text" maxlength="2">
+                    <button id="aircraft-horizontal" class="ship-button ship-button-clicked" onclick="directionButtons('aircraft-horizontal', 'aircraft-vertical')">Horizontal</button>
+                    <button id="aircraft-vertical" class="ship-button" onclick="directionButtons('aircraft-vertical', 'aircraft-horizontal')">Vertical</button>
+                    <button id="aircraft-place" class="ship-button ship-submit" onclick="placePlayerShips('Aircraft-X', 'Aircraft-Y', 'aircraft-horizontal', 'aircraft-message', PLAYER_SHIPS[4]) ">Place Ship</button>
+                </div>
+                <p id="aircraft-message" class="ship-message"></p>
+            </div>
+            <div class="ship-placer">
+                <p class="ship-placer-title">Battleship</p>
+                <div class="ship-coords">
+                    <label for="Battleship-X">X Coord</label><input id="Battleship-X" type="text" maxlength="2">
+                    <label for="Battleship-Y">Y Coord</label><input id="Battleship-Y" type="text" maxlength="2">
+                    <button id="battleship-horizontal" class="ship-button ship-button-clicked" onclick="directionButtons('battleship-horizontal', 'battleship-vertical')">Horizontal</button>
+                    <button id="battleship-vertical" class="ship-button" onclick="directionButtons('battleship-vertical', 'battleship-horizontal')">Vertical</button>
+                    <button id="battleship-place" class="ship-button ship-submit" onclick="placePlayerShips('Battleship-X', 'Battleship-Y', 'battleship-horizontal', 'battleship-message', PLAYER_SHIPS[3]) ">Place Ship</button>
+                </div>
+                <p id="battleship-message" class="ship-message"></p>
+            </div>
+            <div class="ship-placer">
+                <p class="ship-placer-title">Destroyer</p>
+                <div class="ship-coords">
+                    <label for="Destroyer-X">X Coord</label><input id="Destroyer-X" type="text" maxlength="2">
+                    <label for="Destroyer-Y">Y Coord</label><input id="Destroyer-Y" type="text" maxlength="2">
+                    <button id="destroyer-horizontal" class="ship-button ship-button-clicked" onclick="directionButtons('destroyer-horizontal', 'destroyer-vertical')">Horizontal</button>
+                    <button id="destroyer-vertical" class="ship-button" onclick="directionButtons('destroyer-vertical', 'destroyer-horizontal')">Vertical</button>
+                    <button id="destroyer-place" class="ship-button ship-submit" onclick="placePlayerShips('Destroyer-X', 'Destroyer-Y', 'destroyer-horizontal', 'destroyer-message', PLAYER_SHIPS[2]) ">Place Ship</button>
+                </div>
+                <p id="destroyer-message" class="ship-message"></p>
+            </div>
+            <div class="ship-placer">
+                <p class="ship-placer-title">Submarine</p>
+                <div class="ship-coords">
+                    <label for="Submarine-X">X Coord</label><input id="Submarine-X" type="text" maxlength="2">
+                    <label for="Submarine-Y">Y Coord</label><input id="Submarine-Y" type="text" maxlength="2">
+                    <button id="submarine-horizontal" class="ship-button ship-button-clicked" onclick="directionButtons('submarine-horizontal', 'submarine-vertical')">Horizontal</button>
+                    <button id="submarine-vertical" class="ship-button" onclick="directionButtons('submarine-vertical', 'submarine-horizontal')">Vertical</button>
+                    <button id="submarine-place" class="ship-button ship-submit" onclick="placePlayerShips('Submarine-X', 'Submarine-Y', 'submarine-horizontal', 'submarine-message', PLAYER_SHIPS[1]) ">Place Ship</button>
+                </div>
+                <p id="submarine-message" class="ship-message"></p>
+            </div>
+            <div class="ship-placer">
+                <p class="ship-placer-title">Boat</p>
+                <div class="ship-coords">
+                    <label for="Boat-X">X Coord</label><input id="Boat-X" type="text" maxlength="2">
+                    <label for="Boat-Y">Y Coord</label><input id="Boat-Y" type="text" maxlength="2">
+                    <button id="boat-horizontal" class="ship-button ship-button-clicked" onclick="directionButtons('boat-horizontal', 'boat-vertical')">Horizontal</button>
+                    <button id="boat-vertical" class="ship-button" onclick="directionButtons('boat-vertical', 'boat-horizontal')">Vertical</button>
+                    <button id="boat-place" class="ship-button ship-submit" onclick="placePlayerShips('Boat-X', 'Boat-Y', 'boat-horizontal', 'boat-message', PLAYER_SHIPS[0]) ">Place Ship</button>
+                </div>
+                <p id="boat-message" class="ship-message"></p>
+            </div>
+            <button id="start-game" class="ship-button ship-submit" onclick="startGame()">Start Game</button>
+        </div>
+        <div id="enemy-sidebar" class="sidebar">
+            <h1 class="sidebar-header">CPU</h1>
+            <div>
+                <div class="ship-stats">
+                    <img id="enemy-Aircraft-Carrier" class="aircraft" src="media/Aircraft-Carrier.png" alt="Aircraft">
+                    <p class="ship-name">Aircraft Carrier (A)</p>
+                    <div class="ship-health" id="enemy-Aircraft-Carrier-health"></div>
+                </div>
+                <div class="ship-stats">
+                    <img id="enemy-Battleship" class="battleship" src="media/battleship.png" alt="Battleship">
+                    <p class="ship-name">Battleship (B)</p>
+                    <div class="ship-health" id="enemy-Battleship-health"></div>
+                </div>
+                <div class="ship-stats">
+                    <img id="enemy-Destroyer" class="destroyer" src="media/destroyer.png" alt="Destroyer">
+                    <p class="ship-name">Destroyer (D)</p>
+                    <div class="ship-health" id="enemy-Destroyer-health"></div>
+                </div>
+                <div class="ship-stats">
+                    <img id="enemy-Submarine" class="submarine" src="media/submarine.png" alt="Submarine">
+                    <p class="ship-name">Submarine (S)</p>
+                    <div class="ship-health" id="enemy-Submarine-health"></div>
+                </div>
+                <div class="ship-stats">
+                    <img id="enemy-Boat" class="boat" src="media/boat.png" alt="Boat">
+                    <p class="ship-name">Boat (T)</p>
+                    <div class="ship-health" id="enemy-Boat-health"></div>
+                </div>
+            </div>
+        </div>
+        <p id="comments">Place your 5 ships using the coordinates and the direction buttons</p>
+        <div id="winner-modal">
+            <p id="winner-text">Sergi wins!</p>
+            <button id="play-again" onclick="playAgain()">Play Again</button>
+        </div>
+    </div>
+    
+    <audio id="winner-music" src="media/winner.mp3"></audio>
+    <audio id="placed-ship-sound" src="media/placedship.mp3"></audio>
+    <audio id="countdown" src="media/countdown.mp3"></audio>
+    <audio id="bg-music" src="media/bgmusic.mp3" loop></audio>
+    <audio id="placing-music" src="media/placing.mp3" loop></audio>
+    <audio id="splash" src="media/splash.mp3"></audio>
+    <audio id="explosion" src="media/explosion.mp3"></audio>
+
+    <script src="app.js"></script>
+</body>
+</html>

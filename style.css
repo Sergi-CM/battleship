@@ -1,0 +1,351 @@
+:root {
+    --linesColor: rgb(13, 223, 195);
+}
+
+*{
+    margin: 0;
+    font-family: 'Noto Sans JP', sans-serif;
+    text-align: center;
+}
+
+body {
+    background-color: rgb(29, 31, 37);
+}
+
+#greeting {
+    width: 650px;
+    color: white;
+    position: absolute;
+    padding: 30px;
+    border: 2px solid var(--linesColor);
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#welcome-modal p {
+    margin: 20px;
+    color: white;
+}
+
+#tip {
+    color: rgb(172, 172, 172);
+    font-weight: 150;
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-53%, -50%);
+}
+
+#welcome-title {
+    color: var(--linesColor);
+    font-size: 40px;
+}
+
+#welcome-text {
+    font-size: 20px;
+}
+
+#name-input {
+    color: white;
+    font-size: 16px;
+    width: 300px;
+    height: 30px;
+    background-color: transparent;
+    margin-bottom: 30px;
+}
+
+#start-button {
+    color: white;
+    font-size: 16px;
+    width: 150px;
+    height: 40px;
+    background-color: transparent;
+    border: 2px solid var(--linesColor);
+    border-radius: 20px;
+}
+
+#start-button:hover {
+    cursor: pointer;
+    box-shadow: inset 0px 0px 9px 2px var(--linesColor);
+}
+
+#start-button:active {
+    transform: translateY(8%);
+}
+
+#game-title {
+    position: absolute;
+    top: 30px;
+    color: white;
+    font-size: 60px;
+    display: inline-block;
+    transform: translateX(-50%);
+}
+
+#container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+}
+
+#player-sidebar {
+    border-right: 2px solid var(--linesColor);
+}
+
+#enemy-sidebar {
+    border-left: 2px solid var(--linesColor);
+}
+
+.sidebar {
+    width: 300px;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    color: var(--linesColor);
+}
+
+.sidebar-header {
+    font-size: 40px;
+    color: white;
+    text-transform: uppercase;
+}
+
+#sidebar-player-name {
+    width: 290px;
+    overflow: hidden;
+}
+
+.ship-stats {
+    margin: 10px;
+}
+
+.ship-name {
+    color: white;
+    line-height: 1;
+}
+
+.aircraft {
+    width: 250px;
+}
+
+.battleship {
+    width: 230px;
+}
+
+.destroyer {
+    width: 220px;
+}
+
+.submarine {
+    width: 170px;
+}
+
+.boat {
+    width: 150px;
+}
+
+.ship-health {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.hit {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: rgb(230, 0, 0);
+    margin: 10px;
+}
+
+.no-hit {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: white;
+    margin: 10px;
+}
+
+#player-board, #enemy-board {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 50%;
+    width: 600px;
+    height: 572px;
+}
+
+#player-ships-placer {
+    padding: 0;
+    width: 572px;
+    height: 572px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.ship-placer {
+    font-size: 14px;
+    color: rgb(172, 172, 172);
+    width: 100%;
+    height: 17%;
+}
+
+.ship-placer-title {
+    color: white;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.ship-placer input {
+    color: rgb(172, 172, 172);
+    font-size: 15px;
+    background-color: transparent;
+    width: 30px;
+}
+
+.ship-button {
+    color: rgb(172, 172, 172);
+    font-size: 13px;
+    width: 100px;
+    height: 27px;
+    background-color: transparent;
+    border: 2px solid rgb(172, 172, 172);
+    border-radius: 20px;
+}
+
+.ship-button:hover {
+    cursor: pointer;
+    box-shadow: inset 0px 0px 9px 2px rgb(172, 172, 172);
+}
+
+.ship-button:active {
+    transform: translateY(8%);
+}
+
+.ship-button-clicked {
+    box-shadow: inset 0px 0px 9px 2px rgb(172, 172, 172);
+}
+
+.ship-submit {
+    color: white;
+    border: 2px solid var(--linesColor);
+    border-radius: 20px;
+}
+
+.ship-submit:hover {
+    cursor: pointer;
+    box-shadow: inset 0px 0px 9px 2px var(--linesColor);
+}
+
+.ship-coords {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ship-message {
+    margin-top: 10px;
+}
+
+.square {
+    height: 50px;
+    width: 50px;
+    border: 1px solid rgb(172, 172, 172);
+}
+
+.square:hover {
+    box-shadow: inset 0px 0px 12px 3px rgb(172, 172, 172);
+}
+
+.player-ship {
+    box-shadow: inset 0px 0px 12px 3px rgb(172, 172, 172);
+    color: rgb(172, 172, 172);
+    font-size: 30px;
+}
+
+.enemy-square {
+    cursor: url("media/crosshair.svg") 25 25, crosshair;
+}
+
+.grid-header {
+    height: 52px;
+    width: 52px;
+    color: rgb(172, 172, 172);
+    font-size: 20px;
+}
+
+.row-header {
+    transform: translateY(13px);
+}
+
+#comments {
+    position: absolute;
+    bottom: 100px;
+    color: white;
+    font-size: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.shot {
+    color: rgb(230, 0, 0);
+    font-size: 30px;
+    border-color: rgb(230, 0, 0);
+    box-shadow: inset 0px 0px 12px 3px rgb(230, 0, 0);
+}
+
+.shot:hover {
+    box-shadow: inset 0px 0px 12px 3px rgb(230, 0, 0);
+}
+
+.missed-shot {
+    border-color: rgb(0, 153, 255);
+    box-shadow: inset 0px 0px 12px 3px rgb(0, 153, 255);
+}
+
+.missed-shot:hover {
+    box-shadow: inset 0px 0px 12px 3px rgb(0, 153, 255);
+}
+
+#winner-modal {
+    color: white;
+    position: absolute;
+    left: 50%;
+    top: 47%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    border: 2px solid var(--linesColor);
+    background-color: rgb(29, 31, 37);
+    padding: 30px;
+}
+
+#winner-text {
+    font-size: 30px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+#play-again {
+    color: white;
+    font-size: 16px;
+    width: 150px;
+    height: 40px;
+    background-color: transparent;
+    border: 2px solid var(--linesColor);
+    border-radius: 20px;
+}
+
+#play-again:hover {
+    cursor: pointer;
+    box-shadow: inset 0px 0px 9px 2px var(--linesColor);
+}
+
+#play-again:active {
+    transform: translateY(8%);
+}
